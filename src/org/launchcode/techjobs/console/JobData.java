@@ -23,7 +23,7 @@ public class JobData {
 
     /**
      * Fetch list of all values from loaded data,
-     * without duplicates, for a given column.
+     * without duplicates, f or a given column.
      *
      * @param field The column to retrieve values from
      * @return List of all of the values of the given field
@@ -72,15 +72,34 @@ public class JobData {
 
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
+
         for (HashMap<String, String> row : allJobs) {
 
-            String aValue = row.get(column);
+            String aValue = (row.get(column).toUpperCase());
 
-            if (aValue.contains(value)) {
+            if (aValue.contains(value.toUpperCase())) {
                 jobs.add(row);
             }
         }
+        return jobs;
+    }
 
+
+   public static ArrayList<HashMap<String, String>> findByValue(String value) {
+
+        // load data, if not already loaded
+        loadData();
+
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
+        for (HashMap<String, String> row : allJobs) {
+
+            String aValue = row.toString().toUpperCase();
+
+            if(aValue.contains(value.toUpperCase())){
+                jobs.add(row);
+            }
+          }
         return jobs;
     }
 
@@ -101,7 +120,7 @@ public class JobData {
             CSVParser parser = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(in);
             List<CSVRecord> records = parser.getRecords();
             Integer numberOfColumns = records.get(0).size();
-            String[] headers = parser.getHeaderMap().keySet().toArray(new String[numberOfColumns]);
+            String [] headers = parser.getHeaderMap().keySet().toArray(new String[numberOfColumns]);
 
             allJobs = new ArrayList<>();
 

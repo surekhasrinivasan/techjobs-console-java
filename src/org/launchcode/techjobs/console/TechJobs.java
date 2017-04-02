@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 /**
- * Created by LaunchCode
+ * Created by Launc0hCode
  */
 public class TechJobs {
 
@@ -52,23 +52,24 @@ public class TechJobs {
                 }
 
             } else { // choice is "search"
+                if (actionChoice.equals("search")) {
 
-                // How does the user want to search (e.g. by skill or employer)
-                String searchField = getUserSelection("Search by:", columnChoices);
+                    // How does the user want to search (e.g. by skill or employer)
+                    String searchField = getUserSelection("Search by:", columnChoices);
+                    // What is their search term?
+                    System.out.println("\nSearch term: ");
+                    String searchTerm = in.nextLine();
 
-                // What is their search term?
-                System.out.println("\nSearch term: ");
-                String searchTerm = in.nextLine();
-
-                if (searchField.equals("all")) {
-                    System.out.println("Search all fields not yet implemented.");
-                } else {
-                    printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
+                    if (searchField.equals("all")) {
+                        printJobs(JobData.findByValue(searchTerm));
+                    }
+                    else {
+                        printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
+                    }
                 }
             }
         }
     }
-
     // ﻿Returns the key of the selected item from the choices Dictionary
     private static String getUserSelection(String menuHeader, HashMap<String, String> choices) {
 
@@ -111,6 +112,16 @@ public class TechJobs {
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
-        System.out.println("printJobs is not implemented yet");
+        for(HashMap<String, String> map : someJobs){
+
+            System.out.println("*****");
+            System.out.println("name: " + map.get("name"));
+            System.out.println("employer: " + map.get("employer"));
+            System.out.println("location: " + map.get("location"));
+            System.out.println("position type: " + map.get("position type"));
+            System.out.println("core competency: " + map.get("core competency"));
+            System.out.println("*****");
+        }
+        //System.out.println("printJobs is not implemented yet");
     }
 }
