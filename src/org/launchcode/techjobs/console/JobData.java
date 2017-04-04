@@ -81,6 +81,9 @@ public class JobData {
                 jobs.add(row);
             }
         }
+            if(jobs.isEmpty()) {
+            System.out.println("Invalid Entry. Please try again.");
+            }
         return jobs;
     }
 
@@ -100,6 +103,9 @@ public class JobData {
                 jobs.add(row);
             }
           }
+            if(jobs.isEmpty()) {
+            System.out.println("Invalid Entry. Please try again.");
+            }
         return jobs;
     }
 
